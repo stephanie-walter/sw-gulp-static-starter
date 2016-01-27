@@ -30,26 +30,14 @@ var paths = {
 */
 
 gulp.task('css', function () {
-
-// Where can I find my less files
-  return gulp.src(paths.src.less)
-
-// Compile LESS
-  .pipe(less())
-
-// Will autoprefix the css
-  .pipe(autoprefixer())
-
-// Rename the file with suffix
-  .pipe(rename({
-    suffix: '.min'
-  }))
-
-// Where do I send my CSS files
-  .pipe(gulp.dest(paths.dist.css))
-
-// Trigger browser sync
-  .pipe(browserSync.stream());
+  return gulp.src(paths.src.less) // Where can I find my less files
+    .pipe(less()) // Compile LESS
+    .pipe(autoprefixer()) // Will autoprefix the css
+    .pipe(rename({ // Rename the file with suffix
+      suffix: '.min'
+    }))
+    .pipe(gulp.dest(paths.dist.css)) // Where do I send my CSS files
+    .pipe(browserSync.stream()); // Trigger browser sync
 });
 
 

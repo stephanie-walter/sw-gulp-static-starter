@@ -24,10 +24,9 @@ var paths = {
 };
 
 
-
 /*
  * CSS task :Less compilation, autoprefixer, minification
-*/
+ */
 
 gulp.task('css', function () {
   return gulp.src(paths.src.less) // Where can I find my less files
@@ -43,27 +42,17 @@ gulp.task('css', function () {
 
 /*
  * JS task : minify + uglify
-*/
+ */
 
 gulp.task('js', function () {
-
-// Where can I find my js files
-  return gulp.src(paths.src.js)
-
-// Will minify the JS
-  .pipe(uglify())
-
-// Rename the file with suffix
-  .pipe(rename({
-    suffix: '.min'
-  }))
-  .pipe(gulp.dest(paths.dist.js))
-
-// Trigger browser sync
-  .pipe(browserSync.stream());
-
+  return gulp.src(paths.src.js) // Where can I find my js files
+    .pipe(uglify()) // Will minify the JS
+    .pipe(rename({ // Rename the file with suffix
+      suffix: '.min'
+    }))
+    .pipe(gulp.dest(paths.dist.js))
+    .pipe(browserSync.stream()); // Trigger browser sync
 });
-
 
 
 /*
@@ -71,20 +60,14 @@ gulp.task('js', function () {
  */
 
 gulp.task('watch', function () {
-
-// Watching less and js folders
-  gulp.watch(paths.src.less, ['css']);
-  gulp.watch(paths.src.js, ['js']);
-
-// Start the browsersync server
-  browserSync({
+  gulp.watch(paths.src.less, ['css']); // Watching less folders
+  gulp.watch(paths.src.js, ['js']); // Watching js folders
+  browserSync({ // Start the browsersync server
     server: {
       baseDir: paths.root
     }
   });
-
-// Watching HTML, JS and CSS files for changes
-  gulp.watch(['*.html', paths.dist.css], reload);
+  gulp.watch(['*.html', paths.dist.css], reload); // Watching HTML, JS and CSS files for changes
 });
 
 

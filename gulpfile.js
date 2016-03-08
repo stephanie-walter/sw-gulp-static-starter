@@ -32,6 +32,7 @@ gulp.task('css', function () {
   return gulp.src(paths.src.less) // Where can I find my less files
     .pipe(less()) // Compile LESS
     .pipe(autoprefixer()) // Will autoprefix the css
+    .pipe(minifycss()) // Minify the CSS
     .pipe(rename({ // Rename the file with suffix
       suffix: '.min'
     }))
